@@ -1,0 +1,7 @@
+{
+  "name": "negnet/neg_svg_image",
+  "description": "Provides formatters and functions for handling svg images.",
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}
