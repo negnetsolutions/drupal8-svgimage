@@ -117,6 +117,8 @@ class SvgResponsiveImageFormatter extends ResponsiveImageFormatter {
 
       if ($isSvg) {
         $attributes = $svgAttributes;
+        $attributes['class'][] = 'svg';
+        $attributes['class'][] = 'rs-image-parentwrapper';
       }
 
       $cacheContexts = [];
