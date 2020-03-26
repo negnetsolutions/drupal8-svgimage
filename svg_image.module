@@ -37,11 +37,16 @@ function svg_image_field_formatter_info_alter(array &$info) {
  *   Dimensions array.
  */
 function svg_image_get_image_file_dimensions(File $file) {
-  $image = \Drupal::getContainer()->get('image.factory')->get($file->getFileUri());
+  try {
+    $image = \Drupal::getContainer()->get('image.factory')->get($file->getFileUri());
+  }
+  catch (\Exception $e) {
+    $image = FALSE;
+  }
 
   $variables = [];
 
-  if ($image->isValid()) {
+  if ($image && $image->isValid()) {
     $variables['width'] = $image->getWidth();
     $variables['height'] = $image->getHeight();
   }
