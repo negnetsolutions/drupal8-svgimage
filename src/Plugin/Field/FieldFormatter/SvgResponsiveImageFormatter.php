@@ -115,14 +115,18 @@ class SvgResponsiveImageFormatter extends ResponsiveImageFormatter {
       $attributes = [];
       $isSvg = svg_image_is_file_svg($file);
 
+      $cacheContexts = [];
+
       if ($isSvg) {
         $attributes = $svgAttributes;
         $attributes['class'][] = 'svg';
         $attributes['class'][] = 'rs-image-parentwrapper';
-      }
 
-      $cacheContexts = [];
-      if (isset($linkFile)) {
+        $imageUri = $file->getFileUri();
+        $url = Url::fromUri(file_create_url($imageUri));
+        $cacheContexts[] = 'url.site';
+      }
+      elseif (isset($linkFile)) {
         $imageUri = $file->getFileUri();
         $url = Url::fromUri(file_create_url($imageUri));
         $cacheContexts[] = 'url.site';
@@ -140,7 +144,6 @@ class SvgResponsiveImageFormatter extends ResponsiveImageFormatter {
         $attributes += $item->_attributes;
       }
       unset($item->_attributes);
-
       if (!$isSvg) {
         $elements[$delta] = [
           '#theme' => 'responsive_image_formatter',
